@@ -11,6 +11,16 @@ public class Shop {
         this.name = name; 
     }
 
+    public String showCatalog() {
+        String message = "";
+        for(int i = 0; i < MAX_PRODUCTS; i++){
+            if(catalog[i] != null){
+                message += catalog[i].toString() + "\n";
+            }
+        }
+        return message;
+    }
+
     public double averagePrice(int product) {
         double averagePrice = 0.0;
         double sum = 0.0;
