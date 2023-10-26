@@ -1,78 +1,56 @@
 package model;
 
-public class Tie extends Product {
-    private String silk="silk";
-    private String wool="wool";
-    private int silkPrice=45000;
-    private int woolPrice=30000;
+public class Tie extends Product{
+
+    public final String SILK = "Silk"; 
+    public final String WOOL = "Wool"; 
+    public final int SILK_PRICE = 45000;
+    private int WOOL_PRICE = 30000;
     private String material;
     private int width;
+    
 
-    public Tie(int id, String silk, String wool, int silkPrice, int woolPrice, String material, int width) {
-        super(id);
-        this.silk = silk;
-        this.wool = wool;
-        this.silkPrice = silkPrice;
-        this.woolPrice = woolPrice;
+    public Tie(String id, String material, int width, int price ){
+        super(id, price);
         this.material = material;
         this.width = width;
     }
-    
-    public String getSilk() {
-        return silk;
+
+    public String getMaterial(){
+
+        return material; 
     }
 
-    public void setSilk(String silk) {
-        this.silk = silk;
-    }
+    public void setMaterial(String material){
 
-    public String getWool() {
-        return wool;
-    }
-
-    public void setWool(String wool) {
-        this.wool = wool;
-    }
-
-    public int getSilkPrice() {
-        return silkPrice;
-    }
-
-    public void setSilkPrice(int silkPrice) {
-        this.silkPrice = silkPrice;
-    }
-
-    public int getWoolPrice() {
-        return woolPrice;
-    }
-
-    public void setWoolPrice(int woolPrice) {
-        this.woolPrice = woolPrice;
-    }
-
-    public String getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String material) {
         this.material = material;
     }
 
-    public int getWidth() {
+    public int width(){
+
         return width;
     }
 
-    public void setWidth(int width) {
+    public void width(int width){   
+
         this.width = width;
     }
-    public void calculatePrice(){
-        if(material.equals(silk)){
-            price=silkPrice;
-        }else if(material.equals(wool)){
-            price=woolPrice;
-        }
-        super.price=price;
+
+    public String toString(){
+
+        String result = super.toString();
+        result += "Material: " + material + " Width: " + width;
+
+        return result;
     }
-    
+
+    @Override
+    public void calculatePrice(){
+        if(material.equals(SILK)){
+        super.price = super.price + (SILK_PRICE*width);
+        }else if(material.equals(WOOL)){
+        super.price = super.price + ( WOOL_PRICE*width);
+        }
+    }
 }
     

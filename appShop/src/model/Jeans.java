@@ -1,95 +1,68 @@
 package model;
 
-public class Jeans extends Product {
-    private int pricePerCM=1000;
-    private boolean male=true;
-    private boolean female=false;
-    private double discount=0.25;
-    private boolean gender;
-    private int length;
+public class Jeans extends Product implements Discounts{
 
+
+    public final int PRICE_PER_CM = 1000;
+    public final boolean MALE = true;
+    public final  boolean FEMALE = false;
+    public final double DISCOUNT = 0.25;
+    private boolean gender; 
+    private int length; 
    
+    
     public Jeans(String id, boolean gender, int length, int price){
         super(id, price);
         this.gender = gender; 
         this.length = length; 
 
     }
+
+    public boolean getGender(){
+
+        return gender; 
+    }
+
+    public void setGender(boolean gender){
+
+        this.gender = gender; 
+    }
     
-   
-    public int getPricePerCM() {
-        return pricePerCM;
+    public int getLength(){
+
+        return length; 
     }
 
-    public void setPricePerCM(int pricePerCM) {
-        this.pricePerCM = pricePerCM;
-    }
+    public void setLength(int length){
 
-    public boolean isMale() {
-        return male;
-    }
-
-    public void setMale(boolean male) {
-        this.male = male;
-    }
-
-    public boolean isFemale() {
-        return female;
-    }
-
-    public void setFemale(boolean female) {
-        this.female = female;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public boolean isGender() {
-        return gender;
-    }
-
-    public void setGender(boolean gender) {
-        this.gender = gender;
-    }
-
-    public int getLength() {
-        return length;
-    }
-
-    public void setLength(int length) {
         this.length = length;
     }
 
+    public String toString(){
+
+        String result = super.toString();
+        result += "gender: " + gender + " length: " + length; 
+
+        return result; 
+    }
+
     @Override
-    public void calculateDicount() {
+    public void calculateDiscount() {
+     
         double descuento = 0;
+            if (gender == FEMALE){
+                descuento = super.price * DISCOUNT;
+                super.price = super.price - (int) descuento;
 
-        if(gender == female){
-            descuento = super.price * discount;
-            super.price = super.price - (int)descuento;
-        }
-
-        
+            }
     }
 
     @Override
     public void calculatePrice(){
-        super.price = super.price + (pricePerCM * length);
-
-        /* Como seria siendo privado 
-
-        int totalPrice = getPrice() + (pricePerCM * length);
-
-        setPrice(totalPrice);
-        */
+       super.price = super.price + (PRICE_PER_CM * length);
+        /* Como seria siendo private 
+         int totalPrice = getPrice() + (PRICE_PER_CM * length);
+         setPrice(totalPrice);
+         */
     }
-
-    
-
-    
 }

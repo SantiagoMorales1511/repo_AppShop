@@ -1,112 +1,76 @@
 package model;
 
-public class Blouse extends Product {
-    private String polyester="polyester";
-    private String silk="silk";
-    private String cotton="cotton";
-    private int pricePerMaterial=5000;
-    private double discount=0.2;
-    private String black="black";
-    private String white="white";
-    private String color;
-    private char size;
-    private String material[];
+public class Blouse extends Product{
 
-    public Blouse(int id, String polyester, String silk, String cotton, int pricePerMaterial, double discount, String black, String white, String color, char size, String[] material) {
-        super(id);
-        this.polyester = polyester;
-        this.silk = silk;
-        this.cotton = cotton;
-        this.pricePerMaterial = pricePerMaterial;
-        this.discount = discount;
-        this.black = black;
-        this.white = white;
-        this.color = color;
-        this.size = size;
-        this.material = material;
+    public final String SILK = "Silk"; 
+    public final String POLYESTER = "Polyester"; 
+    public final String COTTON = "cotton";
+    public final int PRICE_PER_MATERIAL = 500;
+    public final double DISCOUNT = 0.2;
+    public final String BLACK = "Black"; 
+    public final String WHITE = "White"; 
+    private String color; 
+    private char size; 
+    private String[] materials;
+
+    public Blouse(String id, int price, char size, String[] materials, String color){
+
+       super(id,price);
+       this.size = size; 
+       this.materials = materials; 
+       this.color = color; 
+
+
     }
     
-    public String getPolyester() {
-        return polyester;
+    public char getSize(){
+
+        return size; 
     }
 
-    public void setPolyester(String polyester) {
-        this.polyester = polyester;
+    public void setSIze(char size){
+
+        this.size = size; 
     }
 
-    public String getSilk() {
-        return silk;
+    public String[] getMaterials(){
+
+        return materials;
     }
 
-    public void setSilk(String silk) {
-        this.silk = silk;
+    public void setMaterial(String []materials ){
+
+        this.materials = materials;
     }
 
-    public String getCotton() {
-        return cotton;
-    }
+    public String getColor(){
 
-    public void setCotton(String cotton) {
-        this.cotton = cotton;
-    }
-
-    public int getPricePerMaterial() {
-        return pricePerMaterial;
-    }
-
-    public void setPricePerMaterial(int pricePerMaterial) {
-        this.pricePerMaterial = pricePerMaterial;
-    }
-
-    public double getDiscount() {
-        return discount;
-    }
-
-    public void setDiscount(double discount) {
-        this.discount = discount;
-    }
-
-    public String getBlack() {
-        return black;
-    }
-
-    public void setBlack(String black) {
-        this.black = black;
-    }
-
-    public String getWhite() {
-        return white;
-    }
-
-    public void setWhite(String white) {
-        this.white = white;
-    }
-
-    public String getColor() {
         return color;
     }
 
-    public void setColor(String color) {
+    public void setColor(String color){
+
         this.color = color;
     }
 
-    public char getSize() {
-        return size;
-    }
-
-    public void setSize(char size) {
-        this.size = size;
-    }
-
-    public String[] getMaterial() {
-        return material;
-    }
-
-    public void setMaterial(String[] material) {
-        this.material = material;
-    }
-
     public void calculatePrice(){
-     super.price=pricePerMaterial;  
+
+         super.price = ( materials.length *PRICE_PER_MATERIAL );
+    }
+    
+    public String toString(){
+
+        String result = super.toString();
+        result += "size: " + size + " materials: " + materials + " color: " + color; 
+
+        return result;
+    }
+
+    @Override
+    public void calculateDiscount() {
+
+        double descuento = 0;
+        descuento = super.price * DISCOUNT;
+        super.price = super.price - (int) descuento;
     }
 }
