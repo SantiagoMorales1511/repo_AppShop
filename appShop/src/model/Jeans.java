@@ -1,7 +1,6 @@
 package model;
 
-public class Jeans extends Product implements Discounts{
-
+public class Jeans extends Product{
 
     public final int PRICE_PER_CM = 1000;
     public final boolean MALE = true;

@@ -6,8 +6,7 @@ public abstract class Product {
     protected int price; 
 
 
-    public Product(String id, int price ){
-
+    public Product(String id, int price){
         this.id = id; 
         this.price = price;
     }

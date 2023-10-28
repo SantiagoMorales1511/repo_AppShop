@@ -10,25 +10,22 @@ public class Blouse extends Product{
     public final String BLACK = "Black"; 
     public final String WHITE = "White"; 
     private String color; 
-    private char size; 
+    private String size; 
     private String[] materials;
 
-    public Blouse(String id, int price, char size, String[] materials, String color){
-
-       super(id,price);
+    public Blouse(String id, int price, String size, String[] materials, String color){
+       super(id, price);
        this.size = size; 
        this.materials = materials; 
        this.color = color; 
-
-
     }
     
-    public char getSize(){
+    public String getSize(){
 
         return size; 
     }
 
-    public void setSIze(char size){
+    public void setSIze(String size){
 
         this.size = size; 
     }

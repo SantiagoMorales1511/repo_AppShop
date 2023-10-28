@@ -21,6 +21,24 @@ public class Shop {
         return message;
     }
 
+    public String searchNumSizeProduct(String size){
+
+        String messageNumSize = "";
+        int count = 0;
+        for(int i = 0; i < MAX_PRODUCTS; i++){
+            if(catalog[i] != null){
+                if(catalog[i] instanceof Blouse){
+                    Blouse objBlouse = (Blouse) catalog[i];
+                    if(objBlouse.getSize().equalsIgnoreCase(size)){
+                        count++;
+                    }
+                }
+            }
+        }
+        messageNumSize = "El numero de blusas de talla " + size + " es: " + count;
+        return messageNumSize;
+    }
+
     public double averagePrice(int product) {
         double averagePrice = 0.0;
         double sum = 0.0;
@@ -82,12 +100,12 @@ public class Shop {
         return message;
     }
 
-    public String addProductToCatalog(String id, char size, String[] materials, String color) { //blouse
-
+    public String addProductToCatalog(String id, String size, String[] materials, String color, int price) { //blouse
+        String message = "";
         Product objP = searchProduct(id);
         if(objP != null){
             message = "El producto ya existe";
-            }else{
+            } else {
             int poss = searchPosition();
             if(poss == -1){
                 message = "No hay espacio en el catalogo";
@@ -99,7 +117,7 @@ public class Shop {
     }
 
     public String addProductToCatalog(String id, String material, int width, int price ) { //Tie
-
+        String message = "";
         Product objP = searchProduct(id);
         if(objP != null){
             message = "El producto ya existe";
