@@ -133,7 +133,7 @@ public class AppShop {
     }
 
     public void testCase() {
-        // Agregar algunos productos de prueba al catálogo
+        // Agregar algunos productos de prueba al catalogo
         shop.addProductToCatalog("001", 50, true, 32); // Jeans
         shop.addProductToCatalog("002", 45, false, 36); // Jeans
 
@@ -145,7 +145,7 @@ public class AppShop {
         shop.addProductToCatalog("006", "Seda", 5, 15); // Lazo
         shop.addProductToCatalog("007", "Algodon", 3, 10); // Lazo
     
-        // Mostrar el catálogo después de agregar productos de prueba
+        // Mostrar el catalogo despues de agregar productos de prueba
         System.out.println("Catalogo después de agregar productos de prueba:");
         showCatalogP();
     
