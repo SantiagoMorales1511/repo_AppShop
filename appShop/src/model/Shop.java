@@ -10,7 +10,7 @@ public class Shop {
         catalog = new Product[MAX_PRODUCTS];
         this.name = name; 
     }
-
+    //mostrar el catalogo de la tienda
     public String showCatalog() {
         String message = "";
         for(int i = 0; i < MAX_PRODUCTS; i++){

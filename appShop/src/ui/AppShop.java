@@ -54,33 +54,32 @@ public class AppShop {
     System.out.println("1. Jeans");
     System.out.println("2. Blouse");
     System.out.println("3. Tie");
-    System.out.print("Ingrese la opción: ");
+    System.out.print("Ingrese la opcion: ");
     int productType = scanner.nextInt();
-    scanner.nextLine(); // Limpia el salto de línea pendiente
+    scanner.nextLine();
     
     if (productType == 1) {
         // Agregar Jeans
         System.out.print("Ingrese el ID del producto: ");
         String id = scanner.nextLine();
-        System.out.print("Ingrese el género (true para hombre, false para mujer): ");
+        System.out.print("Ingrese el genero (true para hombre, false para mujer): ");
         boolean gender = scanner.nextBoolean();
         System.out.print("Ingrese la longitud: ");
         int length = scanner.nextInt();
         System.out.print("Ingrese el precio: ");
         int price = scanner.nextInt();
         
-        // Llama al método correspondiente en el controlador
-        //String message = shop.addProductToCatalog(id, gender, length, price);
-        //System.out.println(message);
+        String message = shop.addProductToCatalog(id, id, productType, price);
+        System.out.println(message);
     } else if (productType == 2) {
         // Agregar Blouse
         System.out.print("Ingrese el ID del producto: ");
         String id = scanner.nextLine();
-        System.out.print("Ingrese el tamaño (S, M, L, XL, etc.): ");
+        System.out.print("Ingrese el tamano (S, M, L, XL, etc.): ");
         String size = scanner.nextLine();
         System.out.print("Ingrese la cantidad de materiales: ");
         int numMaterials = scanner.nextInt();
-        scanner.nextLine(); // Limpia el salto de línea pendiente
+        scanner.nextLine(); 
         String[] materials = new String[numMaterials];
         for (int i = 0; i < numMaterials; i++) {
             System.out.print("Ingrese el material #" + (i + 1) + ": ");
@@ -91,8 +90,7 @@ public class AppShop {
         System.out.print("Ingrese el precio: ");
         int price = scanner.nextInt();
 
-        // Llama al método correspondiente en el controlador
-        String message = shop.addProductToCatalog(id, size, materials, color, price);
+        String message = shop.addProductToCatalog(id, size.toUpperCase(), materials, color, price);
         System.out.println(message);
         
     } else if (productType == 3) {
@@ -106,18 +104,21 @@ public class AppShop {
         System.out.print("Ingrese el precio: ");
         int price = scanner.nextInt();
 
-        // Llama al método correspondiente en el controlador
         String message = shop.addProductToCatalog(id, material, width, price);
         System.out.println(message);
     } else {
-        System.out.println("Opción no válida.");
+        System.out.println("Opcion no valida.");
     }
   
     }
 
     private void showCatalogP() {
         System.out.println("Catalogo de la tienda:");
-        System.out.println(shop.showCatalog());       
+        System.out.println(shop.showCatalog()); 
+        if(shop.showCatalog().equals("")){
+            System.out.println("No hay productos en el catalogo");
+        }
+        
     }
 
     private void numSizeBlouse() {
