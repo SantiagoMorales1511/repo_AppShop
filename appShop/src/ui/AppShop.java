@@ -18,11 +18,12 @@ public class AppShop {
         boolean salir = false;
 
         while (!salir) {
-            System.out.println("Menu:");
+            System.out.println("Menu:\n");
             System.out.println("1. Adicionar producto");
             System.out.println("2. Mostrar el catalogo de la tienda");
-            System.out.println("3. numero de blusas por talla");
-            System.out.println("4. Salir");
+            System.out.println("3. Buscar cantidad de blusas por talla");
+            System.out.println("4. Probar con casos de prueba");
+            System.out.println("5. Salir");
             System.out.print("Seleccione una opcion: ");
 
             int choice = scanner.nextInt();
@@ -39,6 +40,9 @@ public class AppShop {
                     obj.numSizeBlouse();
                     break;
                 case 4:
+                    obj.testCase();
+                    break;
+                case 5:
                     System.out.println("Saliendo del programa.");
                     salir = true;
                     break;
@@ -48,7 +52,7 @@ public class AppShop {
         }
     }
 
-    private void addProductToCatalog() {
+    public void addProductToCatalog() {
 
     System.out.println("Seleccione el tipo de producto a agregar:");
     System.out.println("1. Jeans");
@@ -69,7 +73,7 @@ public class AppShop {
         System.out.print("Ingrese el precio: ");
         int price = scanner.nextInt();
         
-        String message = shop.addProductToCatalog(id, id, productType, price);
+        String message = shop.addProductToCatalog(id,price, gender, length);
         System.out.println(message);
     } else if (productType == 2) {
         // Agregar Blouse
@@ -112,7 +116,7 @@ public class AppShop {
   
     }
 
-    private void showCatalogP() {
+    public void showCatalogP() {
         System.out.println("Catalogo de la tienda:");
         System.out.println(shop.showCatalog()); 
         if(shop.showCatalog().equals("")){
@@ -121,10 +125,34 @@ public class AppShop {
         
     }
 
-    private void numSizeBlouse() {
+    public void numSizeBlouse() {
         System.out.println("Ingrese la talla de la blusa: ");
         String size = scanner.nextLine();
         String message = shop.searchNumSizeProduct(size);
         System.out.println(message);
     }
+
+    public void testCase() {
+        // Agregar algunos productos de prueba al catálogo
+        shop.addProductToCatalog("001", 50, true, 32); // Jeans
+        shop.addProductToCatalog("002", 45, false, 36); // Jeans
+
+        shop.addProductToCatalog("003", "M", new String[]{"Algodon", "Poliester"}, "Azul", 25); // Blusa
+        shop.addProductToCatalog("004", "L", new String[]{"Seda"}, "Rojo", 30); // Blusa
+        shop.addProductToCatalog("005", "M", new String[]{"Algodon"}, "Verde", 20); // Blusa
+
+
+        shop.addProductToCatalog("006", "Seda", 5, 15); // Lazo
+        shop.addProductToCatalog("007", "Algodon", 3, 10); // Lazo
+    
+        // Mostrar el catálogo después de agregar productos de prueba
+        System.out.println("Catalogo después de agregar productos de prueba:");
+        showCatalogP();
+    
+        // Buscar la cantidad de blusas de talla "M"
+        String size = "M";
+        String numSizeMessage = shop.searchNumSizeProduct(size);
+        System.out.println(numSizeMessage);
+    }
+    
 }

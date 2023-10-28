@@ -38,7 +38,7 @@ public abstract class Product {
 
     public String toString(){
 
-        return "id: " + id + "price: " + price;
+        return " -id: " + id + " -price: " + price + " ";
 
     }
 
