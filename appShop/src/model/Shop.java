@@ -1,21 +1,25 @@
 package model;
-
+import java.util.ArrayList;
+//Adicionar la matris de los product porque son estanteria
 public class Shop {
 
     private String name;
-    private Product[] catalog;
-    public final int MAX_PRODUCTS = 150;
+    private ArrayList<Product> catalog;
+    private Product [][] shelf;
+    public final int MAX_FIL = 4;
+    public final int MAX_COL = 3;
+
 
     public Shop(String name) {
-        catalog = new Product[MAX_PRODUCTS];
+        catalog = new ArrayList<Product>();
         this.name = name; 
     }
-    //mostrar el catalogo de la tienda
+
     public String showCatalog() {
         String message = "";
-        for(int i = 0; i < MAX_PRODUCTS; i++){
-            if(catalog[i] != null){
-                message += catalog[i].toString() + "\n";
+        for(int i = 0; i < catalog.size(); i++){
+            if(catalog.get(i) != null){
+                message += catalog.get(i).toString() + "\n";
             }
         }
         return message;
@@ -25,10 +29,10 @@ public class Shop {
 
         String messageNumSize = "";
         int count = 0;
-        for(int i = 0; i < MAX_PRODUCTS; i++){
-            if(catalog[i] != null){
-                if(catalog[i] instanceof Blouse){
-                    Blouse objBlouse = (Blouse) catalog[i];
+        for(int i = 0; i < catalog.size(); i++){
+            if(catalog.get(i) != null){
+                if(catalog.get(i) instanceof Blouse){ //verificacion de clase objeto
+                    Blouse objBlouse = (Blouse) catalog.get(i);
                     if(objBlouse.getSize().equalsIgnoreCase(size)){
                         count++;
                     }
@@ -43,9 +47,9 @@ public class Shop {
         double averagePrice = 0.0;
         double sum = 0.0;
         double count = 0.0;
-        for(int i = 0; i < MAX_PRODUCTS; i++){
-            if(catalog[i] != null){
-                sum += catalog[i].getPrice();
+        for(int i = 0; i < catalog.size(); i++){
+            if(catalog.get(i) != null){
+                sum += catalog.get(i).getPrice();
                 count++;
             }
         }
@@ -58,29 +62,18 @@ public class Shop {
     public Product searchProduct(String product){
         Product objEncontrado = null;
         boolean find = false;
-        for(int i = 0; i < catalog.length && !find; i++){
-            if(catalog[i] != null){
-                if(catalog[i].getId().equals(product)){
-                    objEncontrado = catalog[i];
+        for(int i = 0; i < catalog.size() && !find; i++){
+            
+                if(catalog.get(i).getId().equals(product)){
+                    objEncontrado = catalog.get(i);
                     find = true;
                 }
-            }
+            
         }
         return objEncontrado;
     }
 
-    public int searchPosition(){
-        int position = -1;
-        boolean find = false;
-        for(int i = 0; i < catalog.length && !find; i++){
-            if(catalog[i] == null){
-                position = i;
-                find = true;
-            }
-        }
-        return position;
-    }
-
+   
     public String addProductToCatalog(String id, int price, boolean gender, int lenght) { //Jeans
         
         String message = "Prodducto exitosamente agregado al catalogo";
@@ -88,15 +81,9 @@ public class Shop {
                 if(objP != null){
                     message = "El producto ya existe";
                     }else{
-                        int poss = searchPosition();
-                        if(poss == -1){
-                            message = "No hay espacio en el catalogo";
-                        }else{
-
-                            catalog[poss] = new Jeans(id, gender, lenght, price);
-                        }
+                    catalog.add(new Jeans(id, gender, lenght, price));
                     }
-                
+    
         return message;
     }
 
@@ -105,14 +92,9 @@ public class Shop {
         Product objP = searchProduct(id);
         if(objP != null){
             message = "El producto ya existe";
-            } else {
-            int poss = searchPosition();
-            if(poss == -1){
-                message = "No hay espacio en el catalogo";
             }else{
-                catalog[poss] = new Blouse(id, price, size, materials, color);
+                catalog.add(new Blouse(id, price, size, materials, color));
             }
-        }         
         return message;
     }
 
@@ -122,21 +104,55 @@ public class Shop {
         if(objP != null){
             message = "El producto ya existe";
             }else{
-            int poss = searchPosition();
-            if(poss == -1){
-                message = "No hay espacio en el catalogo";
-            }else{
-                catalog[poss] = new Tie(id, material, width,  price);
+                catalog.add(new Tie(id, material, width,  price));
             }
-            
-        }
         return message;
     }
  
 
-    public String addProducToShelf(String id){
+    public void addProducToShelf(Product objP){
+        boolean found=false;
+        for(int i = 0; i < MAX_FIL && ! found; i++){
+            for(int j = 0; i < MAX_COL && ! found; i++){
+                if(shelf[i][j]==null){
+                    found=true;
+                }
+            }
+        }
+    }
+    //public chec Shefl
+    public boolean checkShelf(){
+        boolean found=false;
+        for(int i = 0; i < MAX_FIL && ! found; i++){
+            for(int j = 0; i < MAX_COL && ! found; i++){
+                if(shelf[i][j]==null){
+                    found=true;
+                }
+            }
+        }
+        return found;
+    }
+
+    public String showShelf(){
         String message = "";
-        return message; 
+        for(int i = 0; i < MAX_FIL; i++){
+            for(int j = 0; i < MAX_COL; i++){
+                if(shelf[i][j]==null){
+                    message+=" ";
+                }
+                else if(shelf[i][j] instanceof Tie){
+                    message+="Tie ";
+                }
+                else if(shelf[i][j] instanceof Blouse){
+                    message+="Blouse  ";
+                }
+                else if(shelf[i][j] instanceof Jeans){
+                    message+="Jeans ";
+                }
+            }
+            message="\n";
+        }
+        return message;
     }
 
     public String getName() {
