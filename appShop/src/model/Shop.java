@@ -1,10 +1,11 @@
 package model;
 import java.util.ArrayList;
-//Adicionar la matris de los product porque son estanteria
+
 public class Shop {
 
     private String name;
     private ArrayList<Product> catalog;
+    private ArrayList<Product> soldProducts;
     private Product [][] shelf;
     public final int MAX_FIL = 4;
     public final int MAX_COL = 3;
@@ -12,6 +13,7 @@ public class Shop {
 
     public Shop(String name) {
         catalog = new ArrayList<Product>();
+        soldProducts = new ArrayList<Product>();
         shelf = new Product[MAX_FIL][MAX_COL];
         this.name = name; 
     }
@@ -166,6 +168,49 @@ public class Shop {
         message += "°°°°°°°°°°°°°°°°°°°°°°°°°\n";
         return message;
     }
+
+    public String sellProduct(String productId) {
+        Product product = searchProduct(productId);
+
+        if (product == null) {
+            return "\"-----------------\nEl producto no existe en el catalogo.\n++++++++++++++++++++++++++++++++++++++";
+        }
+
+        if (product.isSold()) {
+            return "-----------------\nEl producto ya ha sido vendido.\n++++++++++++++++++++++++++++++++++++++";
+        }
+
+        product.setSold(true);
+        removeProductFromShelf(product);
+        return "-----------------\nProducto vendido correctamente.\n++++++++++++++++++++++++++++++++++++++";
+    }
+
+    public void removeProductFromShelf(Product product) {
+        for (int i = 0; i < MAX_FIL; i++) {
+            for (int j = 0; j < MAX_COL; j++) {
+                if (shelf[i][j] != null && shelf[i][j].getId().equals(product.getId())) {
+                    //Agrega "Mueve" el producto de la estanteria a la lista de productos vendidos
+                    soldProducts.add(shelf[i][j]);
+                    shelf[i][j] = null;
+                    return; //El retur asegura que se termine el metodod luego de encontrar y eliminar el producto
+                }
+            }
+        }
+    }
+
+    public String showSoldProducts() {
+        String message = "Productos vendidos\n";
+        if(soldProducts.size() == 0){
+            return message + "No hay productos vendidos.";
+        }else {
+            for (int i = 0; i < soldProducts.size(); i++) {
+                message += soldProducts.get(i).toString() + "\n";
+            }
+        }
+        return message;
+        
+    }
+    
 
     public String getName() {
         return name;

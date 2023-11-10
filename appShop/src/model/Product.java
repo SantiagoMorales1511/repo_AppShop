@@ -3,12 +3,14 @@ package model;
 public abstract class Product {
 
     private String id; 
-    protected int price; 
+    protected int price;
+    private boolean sold;
 
 
     public Product(String id, int price){
         this.id = id; 
         this.price = price;
+        this.sold = false;
     }
 
     public String getId(){
@@ -29,6 +31,14 @@ public abstract class Product {
     public void setPrice(int price){
 
         this.price = price; 
+    }
+
+    public boolean isSold() {
+        return sold;
+    }
+
+    public void setSold(boolean sold) {
+        this.sold = sold;
     }
 
     public String getInfo(){
