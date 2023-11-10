@@ -120,7 +120,7 @@ public class Shop {
     public void addProducToShelf(Product objP){
         boolean found=false;
         for(int i = 0; i < MAX_FIL && ! found; i++){
-            for(int j = 0; i < MAX_COL && ! found; i++){
+            for(int j = 0; j < MAX_COL && ! found; j++){
                 if(shelf[i][j]==null){
                     shelf[i][j] = objP;
                     found=true;
@@ -142,24 +142,28 @@ public class Shop {
     }
 
     public String showShelf(){
-        String message = " ";
+        String message = "   1   \t   2   \t   3 \n";
+        message += "_______ _______ _______ _\n";
         for(int i = 0; i < MAX_FIL; i++){
-            for(int j = 0; i < MAX_COL; i++){
+            message += "|";
+            for(int j = 0; j < MAX_COL; j++){
                 if(shelf[i][j]==null){
-                    message+="FREE ";
+                    message+="[FREE]\t";
                 }
                 else if(shelf[i][j] instanceof Tie){
-                    message+="Tie ";
+                    message+="[Tie ]\t";
                 }
                 else if(shelf[i][j] instanceof Blouse){
-                    message+="Blouse  ";
+                    message+="[Blou]\t";
                 }
                 else if(shelf[i][j] instanceof Jeans){
-                    message+="Jeans ";
+                    message+="[Jean]\t";
                 }
+                message += "|";
             }
             message+="\n";
         }
+        message += "°°°°°°°°°°°°°°°°°°°°°°°°°\n";
         return message;
     }
 
