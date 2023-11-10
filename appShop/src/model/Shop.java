@@ -12,6 +12,7 @@ public class Shop {
 
     public Shop(String name) {
         catalog = new ArrayList<Product>();
+        shelf = new Product[MAX_FIL][MAX_COL];
         this.name = name; 
     }
 
@@ -81,7 +82,9 @@ public class Shop {
                 if(objP != null){
                     message = "El producto ya existe";
                     }else{
-                    catalog.add(new Jeans(id, gender, lenght, price));
+                    objP = new Jeans(id, gender, lenght, price);
+                    catalog.add(objP);
+                    addProducToShelf(objP);
                     }
     
         return message;
@@ -93,7 +96,9 @@ public class Shop {
         if(objP != null){
             message = "El producto ya existe";
             }else{
-                catalog.add(new Blouse(id, price, size, materials, color));
+                objP = new Blouse(id, price, size, materials, color);
+                catalog.add(objP);
+                addProducToShelf(objP);
             }
         return message;
     }
@@ -104,7 +109,9 @@ public class Shop {
         if(objP != null){
             message = "El producto ya existe";
             }else{
-                catalog.add(new Tie(id, material, width,  price));
+                objP = new Tie(id, material, width,  price);
+                catalog.add(objP);
+                addProducToShelf(objP);
             }
         return message;
     }
@@ -115,12 +122,13 @@ public class Shop {
         for(int i = 0; i < MAX_FIL && ! found; i++){
             for(int j = 0; i < MAX_COL && ! found; i++){
                 if(shelf[i][j]==null){
+                    shelf[i][j] = objP;
                     found=true;
                 }
             }
         }
     }
-    //public chec Shefl
+
     public boolean checkShelf(){
         boolean found=false;
         for(int i = 0; i < MAX_FIL && ! found; i++){
@@ -134,11 +142,11 @@ public class Shop {
     }
 
     public String showShelf(){
-        String message = "";
+        String message = " ";
         for(int i = 0; i < MAX_FIL; i++){
             for(int j = 0; i < MAX_COL; i++){
                 if(shelf[i][j]==null){
-                    message+=" ";
+                    message+="FREE ";
                 }
                 else if(shelf[i][j] instanceof Tie){
                     message+="Tie ";
@@ -150,7 +158,7 @@ public class Shop {
                     message+="Jeans ";
                 }
             }
-            message="\n";
+            message+="\n";
         }
         return message;
     }

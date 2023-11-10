@@ -1,6 +1,10 @@
 package ui;
 
+import model.Blouse;
+import model.Jeans;
 import model.Shop;
+import model.Tie;
+
 import java.util.Scanner;
 
 public class AppShop {
@@ -75,6 +79,7 @@ public class AppShop {
             
             String message = shop.addProductToCatalog(id,price, gender, length);
             System.out.println(message);
+            
         } else if (productType == 2) {
             // Agregar Blouse
             System.out.print("Ingrese el ID del producto: ");
@@ -110,6 +115,7 @@ public class AppShop {
 
             String message = shop.addProductToCatalog(id, material, width, price);
             System.out.println(message);
+            
         } else {
             System.out.println("Opcion no valida.");
         }
@@ -151,7 +157,7 @@ public class AppShop {
         shop.addProductToCatalog("007", "Algodon", 3, 10); // Lazo
     
         // Mostrar el catalogo despues de agregar productos de prueba
-        System.out.println("Catalogo después de agregar productos de prueba:");
+        System.out.println("Catalogo despues de agregar productos de prueba:");
         showCatalogP();
     
         // Buscar la cantidad de blusas de talla "M"
