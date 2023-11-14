@@ -199,17 +199,34 @@ public class Shop {
     }
 
     public String showSoldProducts() {
+        int totalJeans = 0;
+        int totalBlouses = 0;
+        int totalTies = 0;
+        int total = 0;
+    
         String message = "Productos vendidos\n";
-        if(soldProducts.size() == 0){
-            return message + "No hay productos vendidos.";
-        }else {
-            for (int i = 0; i < soldProducts.size(); i++) {
-                message += soldProducts.get(i).toString() + "\n";
+        for (Product soldProduct : soldProducts) {
+            message += soldProduct.toString() + "\n";
+    
+            if (soldProduct instanceof Jeans) {
+                totalJeans++;
+            } else if (soldProduct instanceof Blouse) {
+                totalBlouses++;
+            } else if (soldProduct instanceof Tie) {
+                totalTies++;
             }
+    
+            total += soldProduct.getPrice();
         }
+    
+        message += "Total Jeans: \t" + totalJeans + "\n";
+        message += "Total Blouses: \t" + totalBlouses + "\n";
+        message += "Total Ties: \t" + totalTies + "\n";
+        message += "      Total: \t" + total + "\n";
+    
         return message;
-        
     }
+    
     
 
     public String getName() {

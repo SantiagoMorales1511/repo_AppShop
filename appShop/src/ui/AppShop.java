@@ -164,6 +164,8 @@ public class AppShop {
 
         shop.addProductToCatalog("006", "Seda", 5, 15); // Tie
         shop.addProductToCatalog("007", "Algodon", 3, 10); // Tie
+        shop.addProductToCatalog("008", "Algodon", 2, 16); // Tie
+        shop.addProductToCatalog("009", "Seda", 4, 11); // Tie
     
         // Mostrar el catalogo despues de agregar productos de prueba
         System.out.println("Catalogo despues de agregar productos de prueba:");
